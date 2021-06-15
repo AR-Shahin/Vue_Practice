@@ -17,7 +17,9 @@
                  <li class="nav-item">
                  <router-link :to="{name :'star'}" class="nav-link my-nav">Star</router-link>
                 </li>
-
+<li class="nav-item">
+                 <router-link :to="{name :'chart'}" class="nav-link my-nav">Chart</router-link>
+                </li>
             </ul>
             </div>
         </div>
