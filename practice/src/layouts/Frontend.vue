@@ -14,7 +14,7 @@ components :{
 }
 </script>
 <style lang="css">
-    .router-link-exact-active.my-nav{
+  .router-link-exact-active.my-nav{
   background:#2c3e50;
   font-weight: bold;
   color: #ecf0f1;
