@@ -19,6 +19,7 @@
                 </li>
 <li class="nav-item">
                  <router-link :to="{name :'chart'}" class="nav-link my-nav">Chart</router-link>
+                 <!-- <input ref="input" /> -->
                 </li>
             </ul>
             </div>
@@ -29,7 +30,14 @@
 
 <script>
     export default {
-        
+         methods: {
+    focusInput() {
+      this.$refs.input.value = 'dd'
+    }
+  },
+  mounted() {
+    this.focusInput()
+  }
     }
 </script>
 

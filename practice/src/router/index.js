@@ -11,22 +11,22 @@ const routes = [
       {
             path: '/home',
             name: 'home',
-            component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
+            component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
           },
         {
             path: 'slider',
             name: 'slider',
-            component: () => import(/* webpackChunkName: "about" */ '../views/Slider.vue')
+            component: () => import(/* webpackChunkName: "slider" */ '../views/Slider.vue')
           },
            {
           path: '/star',
           name: 'star',
-          component: () => import(/* webpackChunkName: "about" */ '../views/Star.vue')
+          component: () => import(/* webpackChunkName: "star" */ '../views/Star.vue')
         },
          {
           path: '/chart',
           name: 'chart',
-          component: () => import(/* webpackChunkName: "about" */ '../views/Chart.vue')
+          component: () => import( '../views/Chart.vue')
         }
     ]
   },
