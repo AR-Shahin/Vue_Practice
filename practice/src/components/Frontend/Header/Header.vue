@@ -30,14 +30,15 @@
 
 <script>
     export default {
-         methods: {
-    focusInput() {
-      this.$refs.input.value = 'dd'
-    }
-  },
-  mounted() {
-    this.focusInput()
-  }
+//     methods: {
+//     customRef() {
+//       this.$refs.input.value = 'Shahin'
+//       //console.log(this.$refs);
+//     }
+//   },
+//   mounted() {
+//     this.customRef()
+//   }
     }
 </script>
 
