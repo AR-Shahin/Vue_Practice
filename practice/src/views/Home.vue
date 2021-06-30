@@ -6,12 +6,31 @@
   <TestComponent :title="test" @custom-event="myCustomEvent($event)"/>
   <button @click="change" class="btn btn-sm btn-danger">Click</button> <br>
   {{ test }}
+  <SlotComponent>
+      <template v-slot:header>
+    <h1>Here might be a page title</h1>
+  </template>
+
+  <template v-slot:default>
+    <p>A paragraph for the main content.</p>
+    <p>And another one.</p>
+  </template>
+<template v-slot:shahin>
+    <div>
+        <h5 class="text-success">Hello Shahin Bhai Slot</h5>
+    </div>
+</template>
+  <template v-slot:footer>
+    <p>Here's some contact info</p>
+  </template>  
+  </SlotComponent>
   </div>
 </template>
 
 <script>
 
 import TestComponent from '../components/TestComponent.vue'
+import SlotComponent from '../components/SlotComponent.vue'
 export default {
   name: 'Home',
   data(){
@@ -20,7 +39,7 @@ export default {
       }
   },
   components: {
-    TestComponent
+    TestComponent,SlotComponent
   },
  methods: {
     customRef() {
