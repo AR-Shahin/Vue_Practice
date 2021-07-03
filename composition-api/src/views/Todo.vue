@@ -13,8 +13,7 @@
                 :class="{'bg-green-200': todo.isDone}"
                >
             <div>
-              <div>{{ todo.title }}</div>
-              <!-- {{ $day(todo.created_at).format('DD-MM-YY hh:mma') }} -->
+              <div>{{ todo.title.toUpperCase() }}</div>
               <div class="text-gray-500 text-sm">{{ formatTime(todo.created_at) }}</div>
             </div>
             <div class="space-x-2">
@@ -49,6 +48,14 @@
                    <span v-if=" todos.validationErrors.title" class="text-red-500">{{ todos.validationErrors.title[0]}}</span>
                   
           </div>
+             <div class="p-3 pl-8 bg-white shadow-md rounded">
+            <h2 class="text-xl">Search</h2>
+            <input type="text"
+                  @keyup="searchTask"
+                   v-model="search"
+                   placeholder="Search your Task "
+                   class="p-2 mt-4 border rounded w-full">       
+          </div>
         </div>
       </div>
     </div>
@@ -57,64 +64,17 @@
 
 
 <script>
-import * as moment from "moment/moment";
-import axios from 'axios'
-import { reactive, ref } from '@vue/reactivity'
+import Helper from '../composables/Helper'
+import ToDo from '../composables/ToDo'
 export default {
   
     setup(){
-        const item = ref(null)
-        let todos = reactive({data : [],validationErrors : []})
+        const { formatTime ,print } = Helper()
 
-        // Get All List
-        const fetchToDos = async () => {
-            const response = await axios.get(process.env.VUE_APP_BASE_API_URL  + 'todos')
-            todos.data = (response.data)
-        }
+        const {removeTask,taskUndo,taskDone,addNewItem,fetchToDos,todos,item,search,searchTask} = ToDo()
+
         fetchToDos()
-
-        // Add New Item
-        const addNewItem = async () => {
-            try{
-                todos.validationErrors = ''
-                let response = await axios.post(process.env.VUE_APP_BASE_API_URL  + 'todos',{
-                    title : item.value
-                })
-               todos.data.unshift(response.data)
-               item.value = ''
-            }catch(err){
-                if (err.response.status == 422){
-                todos.validationErrors = err.response.data.errors
-              }
-            } 
-        }
-         
-        // Task done
-        const taskDone = async (id,index) => {
-            await axios.post(process.env.VUE_APP_BASE_API_URL  + 'todo-toggle/' + id ,{
-                flag : 'done'
-            })
-            todos.data[index].isDone = true
-        }
-        
-        // Task undo
-        const taskUndo = async (id,index) => {
-            await axios.post(process.env.VUE_APP_BASE_API_URL  + 'todo-toggle/' + id ,{
-                flag : 'undo'
-            })
-            todos.data[index].isDone = false
-        }
-
-        const removeTask = (id,index) => {
-            if(confirm('Are you sure ?')){
-                axios.delete(process.env.VUE_APP_BASE_API_URL  + 'todos/' + id)
-                todos.data.splice(index,1)
-            }
-           
-        }
-        // Format time
-    const formatTime = (e) => moment(e).format('MMMM Do YYYY, h:mm:ss a');
-        const print = (e) => console.log(e)
+       
         return {
             todos,
             addNewItem,
@@ -123,7 +83,9 @@ export default {
             taskDone,
             taskUndo,
             removeTask,
-            formatTime
+            formatTime,
+            search,
+            searchTask
             
         
         }
