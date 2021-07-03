@@ -27,6 +27,11 @@ const routes = [
           path: '/chart',
           name: 'chart',
           component: () => import( '../views/Chart.vue')
+        },
+        {
+            path: '/directive',
+            name: 'directive',
+            component: () => import( '../views/CustomDirective.vue')
         }
     ]
   },
